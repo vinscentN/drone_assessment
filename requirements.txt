@@ -1,0 +1,6 @@
+django
+djangorestframework
+pillow
+celery
+redis
+django-celery-results
