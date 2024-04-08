@@ -18,7 +18,8 @@
    - Install the project dependencies by running `pip install -r requirements.txt`. Ensure Python and pip are already installed on your system.
 
 5. **Run Migrations**:
-   - Apply database migrations by executing `python manage.py migrate`.
+   - Apply database migrations by executing `python manage.py makemigrations`.
+   - Execute `python manage.py migrate`.
 
 6. **Load Initial Data** (optional):
    - Load initial data (Sample Medications) into the database using `python manage.py loaddata medication`.
