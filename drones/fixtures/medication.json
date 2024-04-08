@@ -1,0 +1,52 @@
+[
+    {
+        "model": "drones.medication",
+        "pk": 1,
+        "fields": {
+            "name": "Medication A",
+            "weight": 100,
+            "code": "MED001",
+            "image": "medication_a.jpg"
+        }
+    },
+    {
+        "model": "drones.medication",
+        "pk": 2,
+        "fields": {
+            "name": "Medication B",
+            "weight": 150,
+            "code": "MED002",
+            "image": "medication_b.jpg"
+        }
+    },
+    {
+        "model": "drones.medication",
+        "pk": 3,
+        "fields": {
+            "name": "Medication C",
+            "weight": 200,
+            "code": "MED003",
+            "image": "medication_c.jpg"
+        }
+    },
+    {
+        "model": "drones.medication",
+        "pk": 4,
+        "fields": {
+            "name": "Medication D",
+            "weight": 75,
+            "code": "MED004",
+            "image": "medication_d.jpg"
+        }
+    },
+    {
+        "model": "drones.medication",
+        "pk": 5,
+        "fields": {
+            "name": "Medication E",
+            "weight": 120,
+            "code": "MED005",
+            "image": "medication_e.jpg"
+        }
+    }
+]

@@ -27,6 +27,7 @@ class Drone(models.Model):
     weight_limit = models.FloatField(validators=[MaxValueValidator(500)]) 
     battery_capacity = models.FloatField(default=100, validators=[MinValueValidator(0), MaxValueValidator(100)])
     state = models.CharField(max_length=20, choices=STATE_CHOICES)
+    medication = models.ManyToManyField('Medication', blank=True,related_name="medication")
 
     def __str__(self):
         return f"Drone {self.serial_number} - {self.model}"
@@ -45,6 +46,7 @@ class Medication(models.Model):
     weight = models.FloatField(validators=[MinValueValidator(0)])
     code = models.CharField( max_length=100, unique=True,validators=[code_validator])
     image = models.ImageField(upload_to='uploads/')
+
 
     def __str__(self):
         return self.name

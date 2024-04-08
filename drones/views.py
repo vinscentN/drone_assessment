@@ -3,7 +3,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import Drone, Medication
-from .serializers import DroneSerializer, MedicationSerializer
+from .serializers import DroneSerializer, MedicationSerializer, DroneLoadedSerializer
 
 
 def generate_response(status_code, message, data):
@@ -41,7 +41,7 @@ class AddMedicationView(APIView):
 
 class LoadDroneView(APIView):
     def post(self, request):
-        drone_serial_number = request.data.get('drone_serial_number')
+        drone_serial_number = request.data.get('serial_number')
         medication_ids = request.data.get('medication_ids', [])
         total_weight = sum(Medication.objects.filter(id__in=medication_ids).values_list('weight', flat=True))
         try:
@@ -55,18 +55,28 @@ class LoadDroneView(APIView):
         if total_weight > drone.weight_limit:
             return generate_response(status.HTTP_403_FORBIDDEN, "Total weight exceeds drone's weight limit.", [])
 
+        for medication_id in medication_ids:
+            drone.medication.add(medication_id)
+
         return generate_response(status.HTTP_200_OK, "Drone loaded with medication items.", [])
+
+
+class GetMedicationView(APIView):
+    def get(self, request):
+        medication = Medication.objects.all()
+        serializer = MedicationSerializer(medication, many=True)
+
+        return generate_response(status.HTTP_200_OK, "All Medication Fetched", serializer.data)
 
 
 class GetLoadedMedicationView(APIView):
     def get(self, request, drone_serial_number):
         try:
-            drone = Drone.objects.get(serial_number=drone_serial_number)
+            drone = Drone.objects.filter(serial_number=drone_serial_number)
         except Drone.DoesNotExist:
             return generate_response(status.HTTP_404_NOT_FOUND, "Drone not found.", [])
 
-        loaded_medication = drone.loaded_medication.all()
-        serializer = MedicationSerializer(loaded_medication, many=True)
+        serializer = DroneLoadedSerializer(drone, many=True)
 
         return generate_response(status.HTTP_200_OK, "Loaded Medication Fetched", serializer.data)
 

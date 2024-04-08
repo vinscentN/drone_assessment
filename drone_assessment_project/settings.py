@@ -126,8 +126,8 @@ CELERY_RESULT_BACKEND = 'django-db'
 #CELERY BEAT SETTINGS
 
 CELERY_BEAT_SCHEDULE = {
-    'run-periodic-task-every-30-seconds': {
-        'task': 'drones.tasks.periodic_task',
+    'Log Battery Level': {
+        'task': 'drones.tasks.check_battery_levels',
         'schedule': 10.0,
     },
 }
