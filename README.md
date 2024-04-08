@@ -28,6 +28,7 @@
 
 8. **Start Celery Beat Scheduler and Worker with Redis**:
    - Install Redis if not already installed and ensure it's running.
+   - On a new terminal window navigate to where Redis is on your local machine and run `redis-server`
    - Open a new terminal window.
    - Navigate to your project directory.
    - Start Celery beat scheduler with `celery -A drone_assessment_project beat -l info`.
